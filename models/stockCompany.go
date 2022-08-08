@@ -21,6 +21,13 @@ func (sc StockCompanySql) GetByTicker(ticker string) StockCompany {
 	return result
 }
 
+func (sc StockCompanySql) GetAll() []StockCompany {
+	var result []StockCompany
+
+	sc.Db.Table("stock_companies").Select("ticker", "number_of_stocks").Scan(&result)
+	return result
+}
+
 func (sc StockCompanySql) Create(payload StockCompany) {
 	sc.Db.Create(&payload)
 }
